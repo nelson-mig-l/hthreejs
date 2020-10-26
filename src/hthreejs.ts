@@ -19,9 +19,9 @@ export class Hthree {
             //    // normalize large lng distances
             //    b[0] += (centerLng > edgeLng ? 360 : -360);
             //}
-            geometry.vertices.push(this.toCartesian(b))
+            geometry.vertices.push(this.toCartesian(b));
         }
-        
+
         for (let i = 0; i < h3bounds.length - 2; i++) {
             geometry.faces.push(new THREE.Face3(0, i+1, i+2));
         }

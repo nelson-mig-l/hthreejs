@@ -1,9 +1,9 @@
 import * as THREE from "three";
 import * as H3 from "h3-js";
 
-import { OrbitControls } from 'three-orbitcontrols-ts';
+import { OrbitControls } from "three-orbitcontrols-ts";
 
-import { Hthree } from "./hthreejs"
+import { Hthree } from "./hthreejs";
 
 export class Scene {
 
@@ -24,7 +24,7 @@ export class Scene {
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         }
-        window.addEventListener('resize', onWindowResize, false);
+        window.addEventListener("resize", onWindowResize, false);
 
         // Make something visible
         let geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
