@@ -1,16 +1,16 @@
 import * as THREE from "three";
-import * as H3 from "h3-js";
 
 import { OrbitControls } from "three-orbitcontrols-ts";
 
-import { Hthree } from "./hthreejs";
+import { World } from "./world";
+import { PickHelper } from "./picker";
 
 export class Scene {
 
     private camera: THREE.PerspectiveCamera;
     private scene: THREE.Scene;
     private mesh: THREE.Mesh;
-    private m : THREE.Mesh;
+
     private renderer: THREE.WebGLRenderer;
     private controls: OrbitControls;
 
@@ -34,27 +34,24 @@ export class Scene {
 
         this.scene = new THREE.Scene();
 
-        let h3index = H3.geoToH3(37.3615593, -122.0553238, 0);
-        //let h3index = H3.geoToH3(1, 1, 0);
-        this.m = new THREE.Mesh(Hthree.h3ToGeometry(h3index), //Hthree.boundary(), 
-            new THREE.MeshBasicMaterial({color: 0xFF0000})
-        );
-        this.scene.add(this.m);
-        let ns = H3.kRing(h3index, 4);
-        for (let n of ns) {
-            let cl = new THREE.Color();
-            cl.setHex(Math.random() * 0xffffff);
-            let mesh = new THREE.Mesh(Hthree.h3ToGeometry(n), //Hthree.boundary(), 
-                new THREE.MeshBasicMaterial({color: cl, wireframe: false})
-            );
-            this.scene.add(mesh);
-        }
+        let world = new World();
+        this.scene.add(world);
 
         this.camera = camera;
         this.renderer = renderer;
-        //this.scene = new THREE.Scene();
+
         this.controls = new OrbitControls(camera);
+
+        
+
     }
+
+    picker = new PickHelper();
+    
+    public onMouseDown( event ) {
+        this.picker.pick(event, this.camera, this.scene.getObjectByName("world").children);
+    }
+
 
     public initialize(): void {
         this.camera.position.z = 2;
@@ -63,16 +60,21 @@ export class Scene {
 
 
 
-        {
-            const color = 0xFFFFFF;
-            const intensity = 1;
-            const light = new THREE.DirectionalLight(color, intensity);
-            light.position.set(-1, 2, 4);
-            this.scene.add(light);
-          }
+        // {
+        //     const color = 0xFFFFFF;
+        //     const intensity = 1;
+        //     const light = new THREE.DirectionalLight(color, intensity);
+        //     light.position.set(-1, 2, 4);
+        //     this.scene.add(light);
+        //   }
 
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(this.renderer.domElement);
+
+        let self = this;     
+        document.onmousedown = function(event) {
+            self.onMouseDown(event)
+        };
     }
 
     public animate(): void {
