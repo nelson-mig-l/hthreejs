@@ -42,14 +42,16 @@ export class Scene {
 
         this.controls = new OrbitControls(camera);
 
-        
-
     }
 
     picker = new PickHelper();
     
-    public onMouseDown( event ) {
-        this.picker.pick(event, this.camera, this.scene.getObjectByName("world").children);
+    public onMouseDown(event: MouseEvent) {
+        let obj = this.picker.pick(event, this.camera, this.scene.getObjectByName("world").children);
+        let mesh = obj as THREE.Mesh;
+        (mesh.material as THREE.MeshBasicMaterial).color.set( 0xff0000 );
+        console.log(" -> " + obj.name);
+
     }
 
 
@@ -73,7 +75,7 @@ export class Scene {
 
         let self = this;     
         document.onmousedown = function(event) {
-            self.onMouseDown(event)
+            self.onMouseDown(event);
         };
     }
 

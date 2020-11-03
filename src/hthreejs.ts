@@ -1,8 +1,6 @@
 import * as H3 from "h3-js";
 import * as THREE from "three";
 
-
-
 export class Hthree {
 
     private static RADIUS = 0.2;
@@ -33,7 +31,7 @@ export class Hthree {
         return degrees * Math.PI / 180.0;
     }
 
-    private static toCartesian(polar) : THREE.Vector3 {
+    private static toCartesian(polar: number[]) : THREE.Vector3 {
         const phi = this.toRadians(90 - polar[0]);
         const theta = this.toRadians(90 - polar[1]);
         return new THREE.Vector3(
