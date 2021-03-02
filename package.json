@@ -1,5 +1,5 @@
 {
-  "name": "babylonjs-typescript-starter",
+  "name": "hthreejs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "h3-js": "^3.7.0",
-    "three": "^0.116.1",
+    "three": "^0.125.0",
     "three-orbitcontrols-ts": "^0.1.2",
     "webpack-merge": "^4.2.2"
   }

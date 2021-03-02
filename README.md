@@ -28,7 +28,7 @@ Run the following commands from within the repository's root folder to build the
 
     - `index.ts` *application entry point*
 
-    - `scene.ts` *typescript definition file to resolve .glsl files*
+    - `...`
 
 - `public` *folder containing static assets*
 
