@@ -3,26 +3,29 @@ import * as THREE from "three";
 
 export class Hthree {
 
-    private static RADIUS = 0.2;
+    private static RADIUS = 0.5;
 
-    public static h3ToGeometry(h3index: H3.H3Index) : THREE.Geometry {
-        //let h3center = H3.h3ToGeo(h3index);
+    public static h3ToGeometry(h3index: H3.H3Index) : THREE.BufferGeometry {
+
         let h3bounds = H3.h3ToGeoBoundary(h3index);
-        const geometry = new THREE.Geometry();
-
-        //let centerLng = h3center[1];
+        
+        let points = new Array();
         for (let b of h3bounds) {
-            //const edgeLng = b[0];
-            //if (Math.abs(centerLng - edgeLng) > 170) {
-            //    // normalize large lng distances
-            //    b[0] += (centerLng > edgeLng ? 360 : -360);
-            //}
-            geometry.vertices.push(this.toCartesian(b));
+            let v = this.toCartesian(b);
+            points.push(v);
         }
 
-        for (let i = 0; i < h3bounds.length - 2; i++) {
-            geometry.faces.push(new THREE.Face3(0, i+1, i+2));
+        let faces = new Array();
+        for (let i = 0; i < h3bounds.length - 1; i++) {
+            faces.push(0);
+            faces.push(i+1);
+            faces.push(i+2);
         }
+
+        const geometry: THREE.BufferGeometry = new THREE.BufferGeometry();
+        geometry.setFromPoints(points);
+        geometry.setIndex(new THREE.BufferAttribute(
+            new Uint16Array(faces), 1));
         
         return geometry;
     }

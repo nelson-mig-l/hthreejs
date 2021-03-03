@@ -2,7 +2,7 @@
 
 This Repository contains a sample THREE.js application.
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/60d1311220694a2ea64874bd4631e1f5)](https://www.codacy.com/gh/nelson-mig-l/hthreejs/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nelson-mig-l/hthreejs&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/60d1311220694a2ea64874bd4631e1f5)](https://www.codacy.com/gh/nelson-mig-l/hthreejs/dashboard?utm_source=github.com&utm_medium=referral&utm_content=nelson-mig-l/hthreejs&utm_campaign=Badge_Grade)
 
 ## Setup
 
@@ -24,14 +24,14 @@ Run the following commands from within the repository's root folder to build the
 
 ## Structure
 
-- `src/` *source code folder*
+- `src/` _source code folder_
 
-    - `index.ts` *application entry point*
+  - `index.ts` _application entry point_
 
-    - `...`
+  - `...`
 
-- `public` *folder containing static assets*
+- `public` _folder containing static assets_
 
-    - `index.html` *HTML entry point*
+  - `index.html` _HTML entry point_
 
-- `dist` *folder containing output of build process*
+- `dist` _folder containing output of build process_

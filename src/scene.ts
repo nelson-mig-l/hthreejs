@@ -48,10 +48,13 @@ export class Scene {
     
     public onMouseDown(event: MouseEvent) {
         let obj = this.picker.pick(event, this.camera, this.scene.getObjectByName("world").children);
-        let mesh = obj as THREE.Mesh;
-        (mesh.material as THREE.MeshBasicMaterial).color.set( 0xff0000 );
-        console.log(" -> " + obj.name);
-
+        if (obj != null) {
+            let mesh = obj as THREE.Mesh;
+            let cl = new THREE.Color();
+            cl.setHex(Math.random() * 0xffffff);
+            (mesh.material as THREE.MeshBasicMaterial).color = cl;
+            console.log(" -> " + obj.name);
+        }
     }
 
 
@@ -59,16 +62,6 @@ export class Scene {
         this.camera.position.z = 2;
 
         this.scene.add(this.mesh);
-
-
-
-        // {
-        //     const color = 0xFFFFFF;
-        //     const intensity = 1;
-        //     const light = new THREE.DirectionalLight(color, intensity);
-        //     light.position.set(-1, 2, 4);
-        //     this.scene.add(light);
-        //   }
 
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(this.renderer.domElement);
