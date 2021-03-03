@@ -1,8 +1,10 @@
-# THREE.js Typescript Starter
+# hthreejs
 
-This Repository contains a sample THREE.js application.
+Rendering [h3-js](https://github.com/uber/h3-js) using [three.js](https://github.com/mrdoob/three.js).
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/60d1311220694a2ea64874bd4631e1f5)](https://www.codacy.com/gh/nelson-mig-l/hthreejs/dashboard?utm_source=github.com&utm_medium=referral&utm_content=nelson-mig-l/hthreejs&utm_campaign=Badge_Grade)
+
+[![CI](https://github.com/nelson-mig-l/hthreejs/actions/workflows/build.yml/badge.svg)](https://github.com/nelson-mig-l/hthreejs/actions/workflows/build.yml)
 
 ## Setup
 
