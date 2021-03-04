@@ -29,6 +29,9 @@ jobs:
         run: |
           npm install
           npm run build
+          ls
+          cd dist
+          ls
       - name: copy file
         uses: canastro/copy-file-action@master
         with:
