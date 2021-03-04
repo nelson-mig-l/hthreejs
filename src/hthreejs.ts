@@ -3,9 +3,15 @@ import * as THREE from "three";
 
 export class Hthree {
 
-    private static RADIUS = 0.5;
+    private static DEFAULT_RADIUS = 0.5;
 
-    public static h3ToGeometry(h3index: H3.H3Index) : THREE.BufferGeometry {
+    private _radius: number;
+
+    public constructor(radius: number) {
+        this._radius = radius ? radius : Hthree.DEFAULT_RADIUS;
+    }
+
+    public h3ToGeometry(h3index: H3.H3Index) : THREE.BufferGeometry {
 
         let h3bounds = H3.h3ToGeoBoundary(h3index);
         
@@ -24,23 +30,21 @@ export class Hthree {
 
         const geometry: THREE.BufferGeometry = new THREE.BufferGeometry();
         geometry.setFromPoints(points);
-        geometry.setIndex(new THREE.BufferAttribute(
-            new Uint16Array(faces), 1));
-        
+        geometry.setIndex(new THREE.BufferAttribute(new Uint16Array(faces), 1));
         return geometry;
     }
 
-    private static toRadians(degrees: number) : number {
+    private toRadians(degrees: number) : number {
         return degrees * Math.PI / 180.0;
     }
 
-    private static toCartesian(polar: number[]) : THREE.Vector3 {
+    private toCartesian(polar: number[]) : THREE.Vector3 {
         const phi = this.toRadians(90 - polar[0]);
         const theta = this.toRadians(90 - polar[1]);
         return new THREE.Vector3(
-            this.RADIUS * Math.sin(phi) * Math.cos(theta), // x
-            this.RADIUS * Math.cos(phi), // y
-            this.RADIUS * Math.sin(phi) * Math.sin(theta) // z            
+            this._radius * Math.sin(phi) * Math.cos(theta), // x
+            this._radius * Math.cos(phi), // y
+            this._radius * Math.sin(phi) * Math.sin(theta) // z            
         );
     }
 
