@@ -3,12 +3,12 @@ import * as THREE from "three";
 
 export class Hthree {
 
-    private static DEFAULT_RADIUS = 0.5;
+    private static DEFAULT_RADIUS = 1;
 
     private _radius: number;
 
-    public constructor(radius: number) {
-        this._radius = radius ? radius : Hthree.DEFAULT_RADIUS;
+    public constructor(radius: number = Hthree.DEFAULT_RADIUS) {
+        this._radius = radius;
     }
 
     public h3ToGeometry(h3index: H3.H3Index) : THREE.BufferGeometry {
@@ -34,13 +34,9 @@ export class Hthree {
         return geometry;
     }
 
-    private toRadians(degrees: number) : number {
-        return degrees * Math.PI / 180.0;
-    }
-
     private toCartesian(polar: number[]) : THREE.Vector3 {
-        const phi = this.toRadians(90 - polar[0]);
-        const theta = this.toRadians(90 - polar[1]);
+        const phi = H3.degsToRads(90 - polar[0]);
+        const theta = H3.degsToRads(90 - polar[1]);
         return new THREE.Vector3(
             this._radius * Math.sin(phi) * Math.cos(theta), // x
             this._radius * Math.cos(phi), // y

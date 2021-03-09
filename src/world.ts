@@ -12,7 +12,7 @@ export class World extends THREE.Object3D {
         super();
         this.name = "world";
 
-        let hthree = new HTHREE.Hthree(1);
+        let hthree = new HTHREE.Hthree();
 
         let indexes = H3.getRes0Indexes();
         for (let index of indexes) {
