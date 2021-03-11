@@ -1,4 +1,6 @@
 import * as THREE from "three";
+import * as HTHREE from "./hthreejs";
+import * as H3 from "h3-js";
 
 import { OrbitControls } from "three-orbitcontrols-ts";
 
@@ -13,6 +15,8 @@ export class Scene {
 
     private renderer: THREE.WebGLRenderer;
     private controls: OrbitControls;
+
+    private hthree: HTHREE.Hthree;
 
     public constructor() {
         let camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 10);
@@ -34,7 +38,9 @@ export class Scene {
 
         this.scene = new THREE.Scene();
 
-        let world = new World();
+        this.hthree = new HTHREE.Hthree();
+
+        let world = new World(this.hthree);
         this.scene.add(world);
 
         this.camera = camera;
@@ -54,6 +60,7 @@ export class Scene {
             cl.setHex(Math.random() * 0xffffff);
             (mesh.material as THREE.MeshBasicMaterial).color = cl;
             console.log(" -> " + obj.name);
+            console.log(" #> " + H3.h3ToGeo(obj.name));
         }
     }
 

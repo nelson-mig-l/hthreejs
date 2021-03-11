@@ -11,8 +11,7 @@ export class Hthree {
         this._radius = radius;
     }
 
-    public h3ToGeometry(h3index: H3.H3Index) : THREE.BufferGeometry {
-
+    public geoBoundaryOf(h3index: H3.H3Index) : THREE.BufferGeometry {
         let h3bounds = H3.h3ToGeoBoundary(h3index);
         
         let points = new Array();
@@ -32,6 +31,11 @@ export class Hthree {
         geometry.setFromPoints(points);
         geometry.setIndex(new THREE.BufferAttribute(new Uint16Array(faces), 1));
         return geometry;
+    }
+
+    public geoOf(h3index: H3.H3Index) : THREE.Vector3 {
+        let center = H3.h3ToGeo(h3index);
+        return this.toCartesian(center);
     }
 
     private toCartesian(polar: number[]) : THREE.Vector3 {
