@@ -55,12 +55,12 @@ export class Scene {
     public onMouseDown(event: MouseEvent) {
         let obj = this.picker.pick(event, this.camera, this.scene.getObjectByName("world").children);
         if (obj != null) {
-            let mesh = obj as THREE.Mesh;
-            let cl = new THREE.Color();
-            cl.setHex(Math.random() * 0xffffff);
-            (mesh.material as THREE.MeshBasicMaterial).color = cl;
-            console.log(" -> " + obj.name);
-            console.log(" #> " + H3.h3ToGeo(obj.name));
+            // let mesh = obj as THREE.Mesh;
+            // let cl = new THREE.Color();
+            // cl.setHex(Math.random() * 0xffffff);
+            // (mesh.material as THREE.MeshBasicMaterial).color = cl;
+            // console.log(" -> " + obj.name);
+            // console.log(" #> " + H3.h3ToGeo(obj.name));
         }
     }
 

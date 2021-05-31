@@ -38,3 +38,5 @@ Run the following commands from within the repository's root folder to build the
   - `index.html` _HTML entry point_
 
 - `dist` _folder containing output of build process_
+
+https://docs.npmjs.com/creating-and-publishing-unscoped-public-packages
