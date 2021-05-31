@@ -10,7 +10,7 @@ export class World extends THREE.Object3D {
 
     public constructor(hthree: HTHREE.Hthree) {
         super();
-        this.name = "world";
+        super.name = "world";
 
         let indexes = H3.getRes0Indexes();
         for (let index of indexes) {
@@ -20,7 +20,7 @@ export class World extends THREE.Object3D {
                 new THREE.MeshBasicMaterial({color: cl, wireframe: false})
             );
             mesh.name = index;
-            this.add(mesh);
+            super.add(mesh);
         }      
     }
 }

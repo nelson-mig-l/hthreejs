@@ -20,8 +20,8 @@
     "webpack-glsl-loader": "^1.0.1"
   },
   "dependencies": {
-    "h3-js": "^3.7.0",
-    "three": "^0.125.0",
+    "h3-js": "^3.7.2",
+    "three": "^0.128.0",
     "three-orbitcontrols-ts": "^0.1.2",
     "webpack-merge": "^4.2.2"
   }
