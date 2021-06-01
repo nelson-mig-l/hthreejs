@@ -23,7 +23,24 @@ module.exports = {
         ],
     }),
   ],
-  externals: {
-    "babylonjs": "BABYLON",
-  },
+
+  // optimization: {
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       three: {
+  //         test: /[\\/]node_modules[\\/](three)[\\/]/,
+  //         name: 'three',
+  //         chunks: 'all',
+  //         filename: '[name].bundle.js',
+  //       },
+  //       vendor: {
+  //         test: /[\\\/]node_modules[\\\/]/,
+  //         name: 'vendors',
+  //         chunks: 'all',
+  //         filename: '[name].bundle.js',
+  //       }
+  //     }
+  //   }
+  // }
+
 }
