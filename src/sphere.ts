@@ -17,13 +17,17 @@ export class Sphere extends THREE.Object3D {
 
         let indexes = H3.getRes0Indexes();
         for (let index of indexes) {
-            let h3bounds = H3.h3ToGeoBoundary(index);
-            let mesh = new THREE.Mesh(
-                new CellGeometry(Sphere.radius, h3bounds),
-                material
-            );
-            mesh.name = index;
-            super.add(mesh);
+            // see https://h3geo.org/docs/core-library/restable/
+            let children = H3.h3ToChildren(index, 0);
+            for (let child of children) {
+                let h3bounds = H3.h3ToGeoBoundary(child);
+                let mesh = new THREE.Mesh(
+                    new CellGeometry(Sphere.radius, h3bounds),
+                    material
+                );
+                mesh.name = child;
+                super.add(mesh);
+            }
         }
     }
 }

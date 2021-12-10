@@ -10,7 +10,7 @@ export class Scene {
 
     private camera: THREE.PerspectiveCamera;
     private scene: THREE.Scene;
-    private mesh: THREE.Mesh;
+    private object: THREE.Object3D;
 
     private renderer: THREE.WebGLRenderer;
     private controls: OrbitControls;
@@ -29,12 +29,13 @@ export class Scene {
         window.addEventListener("resize", onWindowResize, false);
 
         // Make something visible
-        let geometry = new THREE.BoxGeometry(1, 1, 1);
-        let material = new THREE.MeshNormalMaterial();
-        this.mesh = new THREE.Mesh(geometry, material);
+        //let geometry = new THREE.BoxGeometry(1, 1, 1);
+        //let material = new THREE.MeshNormalMaterial();
+        //this.mesh = new THREE.Mesh(geometry, material);
 
 
-        let sphere = new Sphere()
+        let sphere = new Sphere();
+        this.object = sphere;
 
         this.scene = new THREE.Scene();
 
@@ -44,10 +45,10 @@ export class Scene {
             const color = 0xFFFFFF;
             const intensity = 1;
             const light = new THREE.DirectionalLight(color, intensity);
-            light.position.set(-10, 20, -40);
+            light.position.set(-5, 5, 40);
             this.scene.add(light);
 
-            const l2 = new THREE.AmbientLight( 0x404040 ); // soft white light
+            const l2 = new THREE.AmbientLight( 0xa0a0a0 ); // soft white light
             this.scene.add( l2 );
         }
 
@@ -75,7 +76,7 @@ export class Scene {
     public initialize(): void {
         this.camera.position.z = 2;
 
-        this.scene.add(this.mesh);
+        //this.scene.add(this.mesh);
 
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(this.renderer.domElement);
@@ -89,11 +90,7 @@ export class Scene {
     public animate(): void {
         requestAnimationFrame(() => this.animate());
 
-        //this.mesh.rotation.x += 0.01;
-        //this.mesh.rotation.y += 0.01;
-
-        //this.m.rotation.x += 0.01;
-        //this.m.rotation.y += 0.01;
+        this.object.rotation.y += 0.01;
 
         this.renderer.render(this.scene, this.camera);
     }
