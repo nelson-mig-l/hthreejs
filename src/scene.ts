@@ -1,22 +1,20 @@
 import * as THREE from "three";
 import * as HTHREE from "./hthreejs";
-import * as H3 from "h3-js";
 
 import { OrbitControls } from "three-orbitcontrols-ts";
 
-import { World } from "./world";
 import { PickHelper } from "./picker";
+import { Sphere } from "./sphere";
 
 export class Scene {
 
     private camera: THREE.PerspectiveCamera;
     private scene: THREE.Scene;
-    private mesh: THREE.Mesh;
+    private object: THREE.Object3D;
 
     private renderer: THREE.WebGLRenderer;
     private controls: OrbitControls;
 
-    private hthree: HTHREE.Hthree;
 
     public constructor() {
         let camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 10);
@@ -31,17 +29,28 @@ export class Scene {
         window.addEventListener("resize", onWindowResize, false);
 
         // Make something visible
-        let geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
-        let material = new THREE.MeshNormalMaterial();
-        this.mesh = new THREE.Mesh(geometry, material);
+        //let geometry = new THREE.BoxGeometry(1, 1, 1);
+        //let material = new THREE.MeshNormalMaterial();
+        //this.mesh = new THREE.Mesh(geometry, material);
 
+
+        let sphere = new Sphere();
+        this.object = sphere;
 
         this.scene = new THREE.Scene();
 
-        this.hthree = new HTHREE.Hthree();
+        this.scene.add(sphere);
+        
+        {
+            const color = 0xFFFFFF;
+            const intensity = 1;
+            const light = new THREE.DirectionalLight(color, intensity);
+            light.position.set(-5, 5, 40);
+            this.scene.add(light);
 
-        let world = new World(this.hthree);
-        this.scene.add(world);
+            const l2 = new THREE.AmbientLight( 0xa0a0a0 ); // soft white light
+            this.scene.add( l2 );
+        }
 
         this.camera = camera;
         this.renderer = renderer;
@@ -53,14 +62,13 @@ export class Scene {
     picker = new PickHelper();
     
     public onMouseDown(event: MouseEvent) {
-        let obj = this.picker.pick(event, this.camera, this.scene.getObjectByName("world").children);
+        let obj = this.picker.pick(event, this.camera, this.scene.getObjectByName("sphere").children);
         if (obj != null) {
             let mesh = obj as THREE.Mesh;
             let cl = new THREE.Color();
             cl.setHex(Math.random() * 0xffffff);
-            (mesh.material as THREE.MeshBasicMaterial).color = cl;
+            (mesh.material as THREE.MeshPhongMaterial).color = cl;
             console.log(" -> " + obj.name);
-            console.log(" #> " + H3.h3ToGeo(obj.name));
         }
     }
 
@@ -68,7 +76,7 @@ export class Scene {
     public initialize(): void {
         this.camera.position.z = 2;
 
-        this.scene.add(this.mesh);
+        //this.scene.add(this.mesh);
 
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(this.renderer.domElement);
@@ -82,11 +90,7 @@ export class Scene {
     public animate(): void {
         requestAnimationFrame(() => this.animate());
 
-        //this.mesh.rotation.x += 0.01;
-        //this.mesh.rotation.y += 0.01;
-
-        //this.m.rotation.x += 0.01;
-        //this.m.rotation.y += 0.01;
+        this.object.rotation.y += 0.01;
 
         this.renderer.render(this.scene, this.camera);
     }

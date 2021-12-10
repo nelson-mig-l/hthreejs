@@ -21,15 +21,45 @@ export class Hthree {
         }
 
         let faces = new Array();
-        for (let i = 0; i < h3bounds.length - 1; i++) {
+        for (let i = 0; i < h3bounds.length - 2; i++) {
             faces.push(0);
             faces.push(i+1);
             faces.push(i+2);
         }
 
+        let uvs = new Array();
+        for (let b of h3bounds) {
+            let u = (b[1] + 180.0) / 360.0; 
+            let v = (b[0] +  90.0) / 180.0;
+           if (u > 1.0 ||  u < 0) console.log("FAIL u " + u);
+           if (v > 1.0 ||  v < 0) console.log("FAIL v " + u);
+           console.log(b + " -> " + u + " " + v);
+            uvs.push(u, v);
+        }
+
+
+        /*
+        // manually calculated uvs for hex
+        let uvs = new Array();
+        if (points.length == 6) {
+            console.log("uvs for hex");
+            uvs.push(1.00, 0.50);
+            uvs.push(0.75, 1.00);
+            uvs.push(0.25, 1.00);
+            uvs.push(0.00, 0.50);
+            uvs.push(0.25, 0.00);
+            uvs.push(0.75, 0.00);
+        } else {
+            console.log("uvs for " + points.length);
+        }
+        */
         const geometry: THREE.BufferGeometry = new THREE.BufferGeometry();
         geometry.setFromPoints(points);
         geometry.setIndex(new THREE.BufferAttribute(new Uint16Array(faces), 1));
+        geometry.computeVertexNormals();
+        geometry.setAttribute(
+            'uv',
+            new THREE.BufferAttribute(new Float32Array(uvs), 2));
         return geometry;
     }
 
