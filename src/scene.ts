@@ -1,11 +1,10 @@
 import * as THREE from "three";
 import * as HTHREE from "./hthreejs";
-import * as H3 from "h3-js";
 
 import { OrbitControls } from "three-orbitcontrols-ts";
 
-import { World } from "./world";
 import { PickHelper } from "./picker";
+import { Sphere } from "./sphere";
 
 export class Scene {
 
@@ -16,7 +15,6 @@ export class Scene {
     private renderer: THREE.WebGLRenderer;
     private controls: OrbitControls;
 
-    private hthree: HTHREE.Hthree;
 
     public constructor() {
         let camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 10);
@@ -31,17 +29,27 @@ export class Scene {
         window.addEventListener("resize", onWindowResize, false);
 
         // Make something visible
-        let geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
+        let geometry = new THREE.BoxGeometry(1, 1, 1);
         let material = new THREE.MeshNormalMaterial();
         this.mesh = new THREE.Mesh(geometry, material);
 
 
+        let sphere = new Sphere()
+
         this.scene = new THREE.Scene();
 
-        this.hthree = new HTHREE.Hthree();
+        this.scene.add(sphere);
+        
+        {
+            const color = 0xFFFFFF;
+            const intensity = 1;
+            const light = new THREE.DirectionalLight(color, intensity);
+            light.position.set(-10, 20, -40);
+            this.scene.add(light);
 
-        let world = new World(this.hthree);
-        this.scene.add(world);
+            const l2 = new THREE.AmbientLight( 0x404040 ); // soft white light
+            this.scene.add( l2 );
+        }
 
         this.camera = camera;
         this.renderer = renderer;
@@ -53,14 +61,13 @@ export class Scene {
     picker = new PickHelper();
     
     public onMouseDown(event: MouseEvent) {
-        let obj = this.picker.pick(event, this.camera, this.scene.getObjectByName("world").children);
+        let obj = this.picker.pick(event, this.camera, this.scene.getObjectByName("sphere").children);
         if (obj != null) {
             let mesh = obj as THREE.Mesh;
             let cl = new THREE.Color();
             cl.setHex(Math.random() * 0xffffff);
-            (mesh.material as THREE.MeshBasicMaterial).color = cl;
+            (mesh.material as THREE.MeshPhongMaterial).color = cl;
             console.log(" -> " + obj.name);
-            console.log(" #> " + H3.h3ToGeo(obj.name));
         }
     }
 
