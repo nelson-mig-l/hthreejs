@@ -22,7 +22,7 @@ export class CellGeometry extends THREE.BufferGeometry {
         }
 
         let centerPoint = this.toCartesian(h3center);
-        console.log(centerPoint);
+        //console.log(centerPoint);
 
         let faces = new Array();
         for (let i = 0; i < h3bounds.length - 2; i++) {
@@ -33,25 +33,23 @@ export class CellGeometry extends THREE.BufferGeometry {
 
         let uc = (h3center[1] + 180.0) / 360.0;
         let vc = (h3center[0] +  90.0) / 180.0;
-        console.log(uc + " " + vc);
+        //console.log(uc + " " + vc);
 
         let uvs = new Array();
         for (let b of h3bounds) {
             let u = (b[1] + 180.0) / 360.0; 
             let v = (b[0] +  90.0) / 180.0;
             if (Math.abs(uc - u) > 0.5) {
-                console.log("Fail U("+u+") for " + index);
+                //console.log("Fail U("+u+") for " + index);
                 u = 1-u;
             }
             if (Math.abs(vc - v) > 0.5) {
-                console.log("Fail V("+v+") for " + index);
+                //console.log("Fail V("+v+") for " + index);
                 v = 1-v;
             }
-            //if (((b[1] + 180.0) % 360.0) >0) u = u+1; //console.log("FAIL u " + u);
-            //if (((b[0] +  90.0) % 180.0) >0) v = v+1;//console.log("FAIL v " + v);
             //console.log(b + " -> " + u + " " + v);
             uvs.push(u, v);
-            console.log("   " + u + " " + v);
+            //console.log("   " + u + " " + v);
         }
 
         super.setFromPoints(points);
