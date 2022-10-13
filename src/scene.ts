@@ -1,10 +1,11 @@
 import * as THREE from "three";
-import * as HTHREE from "./hthreejs";
+import * as H3 from "h3-js";
 
 import { OrbitControls } from "three-orbitcontrols-ts";
 
 import { PickHelper } from "./picker";
 import { Sphere } from "./sphere";
+import { CellGeometry } from "./cell";
 
 export class Scene {
 
@@ -65,10 +66,31 @@ export class Scene {
         let obj = this.picker.pick(event, this.camera, this.scene.getObjectByName("sphere").children);
         if (obj != null) {
             let mesh = obj as THREE.Mesh;
+            let geo = mesh.geometry as CellGeometry;
             let cl = new THREE.Color();
             cl.setHex(Math.random() * 0xffffff);
             (mesh.material as THREE.MeshPhongMaterial).color = cl;
-            console.log(" -> " + obj.name);
+            console.log(" -> " + geo.h3index);
+            
+            // Hacky hack
+            var object = this.scene.getObjectByName(mesh.name, true);
+            //var object =  this.scene.getObjectByName("cell#8023fffffffffff", true);
+            console.log(object.geometry.attributes.uv.array);
+            /*
+            //  remove
+            let children = H3.h3ToChildren(geo.h3index, 1);
+            this.scene.getObjectByName("sphere").remove(mesh);
+            // add
+            for (let child of children) {
+                //let h3bounds = H3.h3ToGeoBoundary(child);
+                let mesh = new THREE.Mesh(
+                    new CellGeometry(Sphere.radius, child),
+                    new THREE.MeshPhongMaterial({color: cl, map: Sphere.texture, wireframe: false})
+                );
+                mesh.name = "cell#" + child;
+                this.scene.getObjectByName("sphere").add(mesh);
+            }
+            */
         }
     }
 
