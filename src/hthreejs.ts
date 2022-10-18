@@ -37,22 +37,6 @@ export class Hthree {
             uvs.push(u, v);
         }
 
-
-        /*
-        // manually calculated uvs for hex
-        let uvs = new Array();
-        if (points.length == 6) {
-            console.log("uvs for hex");
-            uvs.push(1.00, 0.50);
-            uvs.push(0.75, 1.00);
-            uvs.push(0.25, 1.00);
-            uvs.push(0.00, 0.50);
-            uvs.push(0.25, 0.00);
-            uvs.push(0.75, 0.00);
-        } else {
-            console.log("uvs for " + points.length);
-        }
-        */
         const geometry: THREE.BufferGeometry = new THREE.BufferGeometry();
         geometry.setFromPoints(points);
         geometry.setIndex(new THREE.BufferAttribute(new Uint16Array(faces), 1));

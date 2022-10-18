@@ -21,9 +21,6 @@ export class CellGeometry extends THREE.BufferGeometry {
             points.push(v);
         }
 
-        let centerPoint = this.toCartesian(h3center);
-        //console.log(centerPoint);
-
         let faces = new Array();
         for (let i = 0; i < h3bounds.length - 2; i++) {
             faces.push(0);
