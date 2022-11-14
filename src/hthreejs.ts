@@ -12,7 +12,7 @@ export class Hthree {
     }
 
     public geoBoundaryOf(h3index: H3.H3Index) : THREE.BufferGeometry {
-        let h3bounds = H3.h3ToGeoBoundary(h3index);
+        let h3bounds = H3.cellToBoundary(h3index);
         
         let points = new Array();
         for (let b of h3bounds) {
@@ -48,7 +48,7 @@ export class Hthree {
     }
 
     public geoOf(h3index: H3.H3Index) : THREE.Vector3 {
-        let center = H3.h3ToGeo(h3index);
+        let center = H3.cellToLatLng(h3index);
         return this.toCartesian(center);
     }
 

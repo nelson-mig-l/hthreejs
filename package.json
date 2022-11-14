@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/three": "^0.146.0",
     "copy-webpack-plugin": "^6.4.1",
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.9",
@@ -20,8 +21,8 @@
     "webpack-glsl-loader": "^1.0.1"
   },
   "dependencies": {
-    "h3-js": "^3.7.2",
-    "three": "^0.128.0",
+    "h3-js": "^4.0.0",
+    "three": "^0.137.0",
     "three-orbitcontrols-ts": "^0.1.2",
     "webpack-merge": "^4.2.2"
   }

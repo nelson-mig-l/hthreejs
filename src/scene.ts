@@ -6,6 +6,7 @@ import { OrbitControls } from "three-orbitcontrols-ts";
 import { PickHelper } from "./picker";
 import { Sphere } from "./sphere";
 import { CellGeometry } from "./cell";
+import { BufferAttribute } from "three";
 
 export class Scene {
 
@@ -70,13 +71,15 @@ export class Scene {
             let cl = new THREE.Color();
             cl.setHex(Math.random() * 0xffffff);
             (mesh.material as THREE.MeshPhongMaterial).color = cl;
-            console.log(" -> " + geo.h3index);
+            console.log(geo);
+            console.log(" => " + geo.h3index);
             
             // Hacky hack
-            var object = this.scene.getObjectByName(mesh.name, true);
+            var object = this.scene.getObjectByName(mesh.name);
             //var object =  this.scene.getObjectByName("cell#8023fffffffffff", true);
-            console.log(object.geometry.attributes.uv.array);
-            /*
+            //console.log(object.geometry.attributes.uv.array);
+            /*.
+
             //  remove
             let children = H3.h3ToChildren(geo.h3index, 1);
             this.scene.getObjectByName("sphere").remove(mesh);

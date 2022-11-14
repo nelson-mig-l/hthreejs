@@ -10,10 +10,10 @@ export class CellGeometry extends THREE.BufferGeometry {
         super();
         this._radius = radius;
         this._h3index = index;
-
-        let h3bounds = H3.h3ToGeoBoundary(index);
-        let h3center = H3.h3ToGeo(index);
+        let h3bounds = H3.cellToBoundary(index);
+        let h3center = H3.cellToLatLng(index);
         console.log(h3center);
+        console.log(this._h3index);
 
         let points = new Array();
         for (let p of h3bounds) {
