@@ -65,17 +65,18 @@ export class Scene {
     
     public onMouseDown(event: MouseEvent) {
         let obj = this.picker.pick(event, this.camera, this.scene.getObjectByName("sphere").children);
+        console.log(this.scene.getObjectByName("sphere").children);
         if (obj != null) {
-            let mesh = obj as THREE.Mesh;
-            let geo = mesh.geometry as CellGeometry;
-            let cl = new THREE.Color();
-            cl.setHex(Math.random() * 0xffffff);
-            (mesh.material as THREE.MeshPhongMaterial).color = cl;
-            console.log(geo);
-            console.log(" => " + geo.h3index);
+            //let mesh = obj as THREE.Mesh;
+            //let geo = mesh.geometry as CellGeometry;
+            //let cl = new THREE.Color();
+            //cl.setHex(Math.random() * 0xffffff);
+            //(mesh.material as THREE.MeshPhongMaterial).color = cl;
+            //console.log(geo);
+            //console.log(" => " + geo.h3index);
             
             // Hacky hack
-            var object = this.scene.getObjectByName(mesh.name);
+            //var object = this.scene.getObjectByName(mesh.name);
             //var object =  this.scene.getObjectByName("cell#8023fffffffffff", true);
             //console.log(object.geometry.attributes.uv.array);
             /*.

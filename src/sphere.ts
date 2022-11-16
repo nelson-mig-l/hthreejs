@@ -21,9 +21,7 @@ export class Sphere extends THREE.Object3D {
 
         let indexes = H3.getRes0Cells();
         let geos = [];
-        let i = 0;
         for (let index of indexes) {
-            // see https://h3geo.org/docs/core-library/restable/
             let children = H3.cellToChildren(index, Sphere.resolution);
             for (let child of children) {
                 let g = new CellGeometry(Sphere.radius, child);
