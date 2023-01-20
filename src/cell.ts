@@ -50,7 +50,7 @@ export class CellGeometry extends THREE.BufferGeometry {
         super.setFromPoints(points);
         super.setIndex(new THREE.BufferAttribute(new Uint16Array(faces), 1));
         super.computeVertexNormals();
-        super.setAttribute('uv', new THREE.BufferAttribute(new Float32Array(uvs), 2));
+        super.setAttribute("uv", new THREE.BufferAttribute(new Float32Array(uvs), 2));
     }
 
     public get h3index() {

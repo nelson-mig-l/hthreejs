@@ -3,11 +3,11 @@ import * as H3 from "h3-js";
 import { CellGeometry } from "./cell";
 
 //import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
-import * as BGU from 'three/examples/jsm/utils/BufferGeometryUtils.js'
+import * as BGU from "three/examples/jsm/utils/BufferGeometryUtils.js";
 
 export class Sphere extends THREE.Object3D {
 
-    static texture = new THREE.TextureLoader().load('earth.png');
+    static texture = new THREE.TextureLoader().load("earth.png");
     static radius = 1;
     static resolution = 1; // [0..]
 
@@ -28,7 +28,7 @@ export class Sphere extends THREE.Object3D {
                 geos.push(g);
             }
         }
-        let geo = BGU.mergeBufferGeometries(geos)
+        let geo = BGU.mergeBufferGeometries(geos);
         super.add(new THREE.Mesh(geo, material));
     }
 }

@@ -62,39 +62,20 @@ export class Scene {
     }
 
     picker = new PickHelper();
+    selectedMaterial = new THREE.MeshBasicMaterial( { color: 0xffaa00, wireframe: false } );
     
     public onMouseDown(event: MouseEvent) {
         let obj = this.picker.pick(event, this.camera, this.scene.getObjectByName("sphere").children);
         console.log(this.scene.getObjectByName("sphere").children);
         if (obj != null) {
-            //let mesh = obj as THREE.Mesh;
-            //let geo = mesh.geometry as CellGeometry;
-            //let cl = new THREE.Color();
-            //cl.setHex(Math.random() * 0xffffff);
-            //(mesh.material as THREE.MeshPhongMaterial).color = cl;
-            //console.log(geo);
-            //console.log(" => " + geo.h3index);
-            
-            // Hacky hack
-            //var object = this.scene.getObjectByName(mesh.name);
-            //var object =  this.scene.getObjectByName("cell#8023fffffffffff", true);
-            //console.log(object.geometry.attributes.uv.array);
-            /*.
-
-            //  remove
-            let children = H3.h3ToChildren(geo.h3index, 1);
-            this.scene.getObjectByName("sphere").remove(mesh);
-            // add
+            console.log("clicked " + obj);
+            //let clickedCell = H3.cellToBoundary(obj);
+            let children = H3.cellToChildren(obj, 2);
             for (let child of children) {
-                //let h3bounds = H3.h3ToGeoBoundary(child);
-                let mesh = new THREE.Mesh(
-                    new CellGeometry(Sphere.radius, child),
-                    new THREE.MeshPhongMaterial({color: cl, map: Sphere.texture, wireframe: false})
-                );
-                mesh.name = "cell#" + child;
-                this.scene.getObjectByName("sphere").add(mesh);
+                let geo = new CellGeometry(Sphere.radius+0.01, child);
+                let m = new THREE.Mesh(geo, this.selectedMaterial)
+                this.object.add(m);
             }
-            */
         }
     }
 
