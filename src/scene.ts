@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import * as H3 from "h3-js";
 
-import { OrbitControls } from "three-orbitcontrols-ts";
+import { OrbitControls } from "@three-ts/orbit-controls";
 
 import { PickHelper } from "./picker";
 import { Sphere } from "./sphere";

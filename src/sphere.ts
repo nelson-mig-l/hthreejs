@@ -13,7 +13,7 @@ export class Sphere extends THREE.Object3D {
 
     constructor() {
         super();
-        super.name = "sphere";
+        this.name = "sphere";
 
         let cl = new THREE.Color();
         cl.setHex(0xffffff);
@@ -28,7 +28,7 @@ export class Sphere extends THREE.Object3D {
                 geos.push(g);
             }
         }
-        let geo = BGU.mergeBufferGeometries(geos);
+        let geo = BGU.mergeGeometries(geos);
         super.add(new THREE.Mesh(geo, material));
     }
 }
