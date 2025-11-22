@@ -22,7 +22,7 @@ export class Scene {
         let camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 10);
         let renderer = new THREE.WebGLRenderer({ antialias: true });
 
-       // Handle window resize
+        // Handle window resize
         function onWindowResize() {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
@@ -42,7 +42,7 @@ export class Scene {
         this.scene = new THREE.Scene();
 
         this.scene.add(sphere);
-        
+
         {
             const color = 0xFFFFFF;
             const intensity = 1;
@@ -50,8 +50,8 @@ export class Scene {
             light.position.set(-5, 5, 40);
             this.scene.add(light);
 
-            const l2 = new THREE.AmbientLight( 0xa0a0a0 ); // soft white light
-            this.scene.add( l2 );
+            const l2 = new THREE.AmbientLight(0xa0a0a0); // soft white light
+            this.scene.add(l2);
         }
 
         this.camera = camera;
@@ -62,8 +62,8 @@ export class Scene {
     }
 
     picker = new PickHelper();
-    selectedMaterial = new THREE.MeshBasicMaterial( { color: 0xffaa00, wireframe: false } );
-    
+    selectedMaterial = new THREE.MeshBasicMaterial({ color: 0xffaa00, wireframe: false });
+
     public onMouseDown(event: MouseEvent) {
         let obj = this.picker.pick(event, this.camera, this.scene.getObjectByName("sphere").children);
         console.log(this.scene.getObjectByName("sphere").children);
@@ -72,8 +72,8 @@ export class Scene {
             //let clickedCell = H3.cellToBoundary(obj);
             let children = H3.cellToChildren(obj, 2);
             for (let child of children) {
-                let geo = new CellGeometry(Sphere.radius+0.01, child);
-                let m = new THREE.Mesh(geo, this.selectedMaterial)
+                let geo = new CellGeometry(Sphere.radius + 0.01, child);
+                let m = new THREE.Mesh(geo, this.selectedMaterial);
                 this.object.add(m);
             }
         }
@@ -88,8 +88,8 @@ export class Scene {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(this.renderer.domElement);
 
-        let self = this;     
-        document.onmousedown = function(event) {
+        let self = this;
+        document.onmousedown = function (event) {
             self.onMouseDown(event);
         };
     }

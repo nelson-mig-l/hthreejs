@@ -1,7 +1,7 @@
-const path = require("path")
-const { merge } = require("webpack-merge")
+const path = require("path");
+const { merge } = require("webpack-merge");
 
-const common = require("./webpack.config.common")
+const common = require("./webpack.config.common");
 
 module.exports = merge(common, {
     mode: "development",
@@ -13,4 +13,4 @@ module.exports = merge(common, {
         compress: true,
         port: 9000,
     },
-})
+});

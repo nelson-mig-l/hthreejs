@@ -17,7 +17,7 @@ export class Sphere extends THREE.Object3D {
 
         let cl = new THREE.Color();
         cl.setHex(0xffffff);
-        let material = new THREE.MeshPhongMaterial({color: cl, map: Sphere.texture, wireframe: false});
+        let material = new THREE.MeshPhongMaterial({ color: cl, map: Sphere.texture, wireframe: false });
 
         let indexes = H3.getRes0Cells();
         let geos = [];
