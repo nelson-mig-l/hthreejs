@@ -12,15 +12,15 @@ on:
   workflow_dispatch:
   
 env:
-  NODE_VERSION: '14.2.0'                # set this to the node version to use  
+  NODE_VERSION: '24'                # set this to the node version to use  
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
       - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: npm install, build, and test
@@ -30,7 +30,7 @@ jobs:
           mkdir -p docs
           cp -a ./dist/. ./docs/
       - name: Commit live demo
-        uses: EndBug/add-and-commit@v7
+        uses: EndBug/add-and-commit@v9
         with:
           author_name: github-actions
           author_email: 41898282+github-actions[bot]@users.noreply.github.com
